@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>James Hayes | Portfolio</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <div class="container">
+        <nav class="tabs">
+            <button class="tab-btn active" onclick="showTab('home')">Home</button>
+            <button class="tab-btn" onclick="showTab('projects')">Projects</button>
+        </nav>
+
+        <section id="home" class="content-section">
+            <div class="profile-header">
+                <img src="assets/pfp.png" alt="James Hayes" class="avatar">
+                <div class="header-text">
+                    <h1>James Hayes</h1>
+                    <p class="tagline">I make stuff :DDD</p>
+                </div>
+            </div>
+
+            <div class="acrylic-card">
+                <h3 class="cyan-text">C00l Infomation! :P</h3>
+                <div class="info-list">
+                    <p>Preferred pronouns: <span class="light-blue">He/Him/His</span></p>
+                    <p>Other names: <span class="white-text">JameszPlayzs, Tinsll, Hayzwillmo</span></p>
+                    <p>Gender: <span class="light-blue">Boy!</span></p>
+                </div>
+                
+                <p class="urgent-text">yeh Aiden...</p>
+            </div>
+        </section>
+
+        <section id="projects" class="content-section" style="display: none;">
+            <div class="project-card">
+                <img src="assets/temp.png" alt="Project Template" class="project-img">
+                <h2>Project Template</h2>
+                <p>Edit this description in your HTML to talk about what you've made!</p>
+            </div>
+        </section>
+    </div>
+
+    <script>
+        function showTab(tabId) {
+            document.querySelectorAll('.content-section').forEach(s => s.style.display = 'none');
+            document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+            document.getElementById(tabId).style.display = 'block';
+            if(event && event.currentTarget) {
+                event.currentTarget.classList.add('active');
+            }
+        }
+    </script>
+</body>
+</html>

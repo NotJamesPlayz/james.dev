@@ -1,0 +1,122 @@
+body {
+    /* Deep blue gradient background */
+    background: radial-gradient(circle at top right, #1e3a8a, #0f172a);
+    background-attachment: fixed;
+    color: #e2e8f0;
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    display: flex;
+    justify-content: center;
+    padding: 20px;
+    margin: 0;
+    min-height: 100vh;
+}
+
+.container {
+    width: 100%;
+    max-width: 450px;
+}
+
+/* Tabs */
+.tabs {
+    display: flex;
+    justify-content: center;
+    gap: 12px;
+    margin-bottom: 35px;
+}
+
+.tab-btn {
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    color: #94a3b8;
+    padding: 12px 35px;
+    border-radius: 12px;
+    cursor: pointer;
+    backdrop-filter: blur(10px);
+    transition: all 0.3s ease;
+}
+
+.tab-btn.active {
+    background: rgba(56, 189, 248, 0.2);
+    border: 1px solid rgba(56, 189, 248, 0.5);
+    color: #7dd3fc;
+    box-shadow: 0 0 15px rgba(56, 189, 248, 0.2);
+}
+
+/* Profile Header */
+.profile-header {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    margin-bottom: 25px;
+}
+
+.avatar {
+    width: 110px;
+    height: 110px;
+    border-radius: 20px;
+    object-fit: cover;
+    border: 2px solid rgba(56, 189, 248, 0.4);
+    /* This adds the acrylic glow effect to the pfp */
+    box-shadow: 0 0 20px rgba(56, 189, 248, 0.2);
+}
+
+h1 {
+    font-size: 2.2rem;
+    color: #f8fafc;
+    margin: 0;
+    text-shadow: 0 0 10px rgba(56, 189, 248, 0.3);
+}
+
+.tagline {
+    color: #7dd3fc;
+    margin-top: 5px;
+    font-weight: 500;
+}
+
+/* Acrylic Card */
+.acrylic-card {
+    background: rgba(15, 23, 42, 0.6);
+    backdrop-filter: blur(16px);
+    border: 1px solid rgba(56, 189, 248, 0.2);
+    border-radius: 24px;
+    padding: 30px;
+    text-align: center;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+}
+
+.info-list p {
+    margin: 12px 0;
+    color: #cbd5e1;
+}
+
+.cyan-text { color: #22d3ee; margin-top: 0; }
+.light-blue { color: #7dd3fc; font-weight: bold; }
+.white-text { color: #ffffff; }
+
+.urgent-text { 
+    color: #38bdf8; 
+    font-size: 0.75rem; 
+    margin-top: 25px; 
+    opacity: 0.7;
+    letter-spacing: 1px;
+}
+
+/* Project Cards */
+.project-card {
+    background: rgba(15, 23, 42, 0.6);
+    backdrop-filter: blur(16px);
+    border-radius: 20px;
+    padding: 15px;
+    margin-bottom: 20px;
+    border: 1px solid rgba(56, 189, 248, 0.1);
+    border-bottom: 4px solid #38bdf8;
+}
+
+.project-img {
+    width: 100%;
+    border-radius: 12px;
+    margin-bottom: 15px;
+}
+
+.project-card h2 { margin: 10px 0 5px 0; color: #f1f5f9; }
+.project-card p { color: #94a3b8; font-size: 0.95rem; }
