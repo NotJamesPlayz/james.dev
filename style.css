@@ -1,14 +1,14 @@
 /* --- Base Theme --- */
 :root {
-    --bg-start: #2a2d3a; /* Darker, more vibrant base */
-    --bg-mid: #1e1e2e; /* Richer mantle */
-    --bg-end: #11111b; /* Deep crust */
-    --glass: rgba(255, 255, 255, 0.1);
-    --glass-border: rgba(255, 255, 255, 0.2);
-    --accent: #cdd6f4; /* Brighter lavender */
-    --accent-strong: #f5c2e7; /* Vibrant pink */
-    --text: #cdd6f4; /* Bright text */
-    --muted: rgba(186, 194, 222, 0.85); /* More visible subtext */
+    --bg-start: #1e1e2e; /* Darker, more vibrant base */
+    --bg-mid: #181825; /* Richer mantle */
+    --bg-end: hsl(240, 23%, 9%); /* Deep crust */
+    --glass: #313244;
+    --glass-border: #45475a;
+    --accent: #b4befe; /* Lavender */
+    --accent-strong: #f5c2e7; /* Pink */
+    --text: #cdd6f4; /* Text */
+    --muted: #a6adc8; /* Subtext */
 }
 
 body {
