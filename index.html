@@ -10,8 +10,8 @@
 
     <div class="container">
         <nav class="tabs">
-            <button class="tab-btn active" onclick="showTab('home')">Home</button>
-            <button class="tab-btn" onclick="showTab('projects')">Projects</button>
+            <button class="tab-btn active" onclick="showTab('home', this)">Home</button>
+            <button class="tab-btn" onclick="showTab('projects', this)">Projects</button>
         </nav>
 
         <section id="home" class="content-section">
@@ -36,7 +36,7 @@
             </div>
 
             <div class="links-container">
-                <a href="https://github.com/NotJamesPlayz" target="_blank" class="link-btn github">Github</a>
+                <a href="https://github.com/tinsll1dev/" target="_blank" class="link-btn github">Github</a>
                 <a href="https://youtube.com/@jameszplayzs" target="_blank" class="link-btn youtube">Youtube</a>
                 <a href="https://x.com/jameszhayezs" target="_blank" class="link-btn twitter">Twitter</a>
                 <a href="https://www.tiktok.com/@jameszplayzs" target="_blank" class="link-btn tiktok">TikTok</a>
@@ -49,19 +49,19 @@
             </div>
 
             <p style="text-align: center; margin-top: 15px; color: white;">
-                Discord user: <strong>@james_hayes</strong>
+                Discord user: <strong class="copy-text" onclick="copyToClipboard('james_hayes')">@james_hayes</strong>
             </p>
 
             <p style="text-align: center; margin-top: 15px; color: white;">
-                Nerimity user: <strong>@james_hayes:hayz</strong>
-            </p>
-
-             <p style="text-align: center; margin-top: 15px; color: white;">
-                MC Java user: <strong>tinssl</strong>
+                Nerimity user: <strong class="copy-text" onclick="copyToClipboard('james_hayes:hayz')">@james_hayes:hayz</strong>
             </p>
 
             <p style="text-align: center; margin-top: 15px; color: white;">
-                MC Bedrock user: <strong>JameszPlayzs</strong>
+                MC Java user: <strong class="copy-text" onclick="copyToClipboard('tinssl')">tinssl</strong>
+            </p>
+
+            <p style="text-align: center; margin-top: 15px; color: white;">
+                MC Bedrock user: <strong class="copy-text" onclick="copyToClipboard('JameszPlayzs')">JameszPlayzs</strong>
             </p>
 
         </section>
@@ -70,40 +70,71 @@
             <h2 class="section-title">Projects</h2>
             
             <div class="projects-grid">
-
                 <a href="https://modrinth.com/shader/kute" target="_blank" class="project-card" style="text-decoration: none; color: inherit;">
                     <img src="assets/kute.png" alt="Kute" class="project-img">
                     <h2>Kute</h2>
                     <p>My very first Minecraft java edition shader!</p>
                 </a>
-
             </div>
         </section>
     </div>
 
 <script>
-    function showTab(tabId) {
-        // 1. Hide all sections and remove active class from buttons
+    function showTab(tabId, btn) {
         document.querySelectorAll('.content-section').forEach(s => s.style.display = 'none');
         document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
-        
-        // 2. Show the selected section
+
         const targetSection = document.getElementById(tabId);
         if (targetSection) {
             targetSection.style.display = 'block';
         }
-        
-        // 3. THE FIX: Scroll the window back to the absolute top
-        window.scrollTo({
-            top: 0,
-            behavior: 'instant' // 'instant' prevents the page from 'sliding' up weirdly during the tab swap
-        });
 
-        // 4. Update the button styling
-        if(event && event.currentTarget) {
-            event.currentTarget.classList.add('active');
+        window.scrollTo({ top: 0, behavior: 'instant' });
+
+        if (btn) {
+            btn.classList.add('active');
         }
     }
+
+    function copyToClipboard(text) {
+        navigator.clipboard.writeText(text).then(() => {
+            const notify = document.createElement('div');
+            notify.innerText = "Copied: " + text;
+
+            Object.assign(notify.style, {
+                position: 'fixed',
+                bottom: '-80px', /* start further down for smoother rise */
+                left: '50%',
+                transform: 'translateX(-50%)',
+                background: 'rgba(0, 255, 255, 0.9)',
+                color: '#000',
+                padding: '12px 24px',
+                borderRadius: '50px',
+                fontWeight: 'bold',
+                zIndex: '9999',
+                boxShadow: '0 4px 15px rgba(0,0,0,0.3)',
+                opacity: '0',
+                transition: 'bottom 0.5s cubic-bezier(0.25, 0.8, 0.25, 1), opacity 0.4s ease'
+            });
+
+            document.body.appendChild(notify);
+
+            requestAnimationFrame(() => {
+                notify.style.bottom = '30px';
+                notify.style.opacity = '1';
+            });
+
+            setTimeout(() => {
+                notify.style.opacity = '0';
+                notify.style.bottom = '-80px';
+                setTimeout(() => notify.remove(), 500);
+            }, 2000);
+
+        }).catch(() => {
+            alert("Copied: " + text);
+        });
+    }
 </script>
+
 </body>
 </html>

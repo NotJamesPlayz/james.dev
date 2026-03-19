@@ -1,18 +1,52 @@
-// Simple page switching logic
-const links = document.querySelectorAll("nav .links a");
-const pages = document.querySelectorAll(".page");
+<script>
+    function showTab(tabId) {
+        document.querySelectorAll('.content-section').forEach(s => s.style.display = 'none');
+        document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
 
-links.forEach(link => {
-    link.addEventListener("click", () => {
-        // Remove active state from all links
-        links.forEach(l => l.classList.remove("active"));
-        link.classList.add("active");
+        const targetSection = document.getElementById(tabId);
+        if (targetSection) {
+            targetSection.style.display = 'block';
+        }
 
-        // Show the correct page
-        const pageName = link.dataset.page;
-        pages.forEach(page => {
-            page.classList.remove("active");
-            if (page.id === pageName) page.classList.add("active");
+        window.scrollTo({
+            top: 0,
+            behavior: 'instant'
         });
-    });
-});
+
+        if (event && event.currentTarget) {
+            event.currentTarget.classList.add('active');
+        }
+    }
+
+    function copyToClipboard(text) {
+        navigator.clipboard.writeText(text).then(() => {
+            const notify = document.createElement('div');
+            notify.innerText = "Copied: " + text;
+
+            Object.assign(notify.style, {
+                position: 'fixed',
+                bottom: '30px',
+                left: '50%',
+                transform: 'translateX(-50%)',
+                background: 'rgba(0, 255, 255, 0.9)',
+                color: '#000',
+                padding: '12px 24px',
+                borderRadius: '50px',
+                fontWeight: 'bold',
+                zIndex: '9999',
+                boxShadow: '0 4px 15px rgba(0,0,0,0.3)',
+                transition: 'opacity 0.4s ease'
+            });
+
+            document.body.appendChild(notify);
+
+            setTimeout(() => {
+                notify.style.opacity = '0';
+                setTimeout(() => notify.remove(), 400);
+            }, 2000);
+
+        }).catch(err => {
+            alert("Copied: " + text);
+        });
+    }
+</script>
