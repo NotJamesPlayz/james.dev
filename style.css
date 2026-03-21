@@ -57,7 +57,8 @@ body {
     color: var(--ctp-text);
     font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
     display: flex;
-    justify-content: center;
+    flex-direction: column;
+    align-items: center;
 
     padding: 0 20px 40px 20px;
     margin: 0;
@@ -65,9 +66,6 @@ body {
     width: 100%;
     box-sizing: border-box;
     overflow-x: hidden;
-
-    position: relative;
-    z-index: 0;
 }
 
 /* --- Top Banner (with fade) --- */
@@ -104,71 +102,51 @@ body::before {
     );
 }
 
-/* --- Fallback overlay --- */
-body::after {
-    content: "";
-    position: absolute;
-    top: calc(var(--banner-height) - 80px);
-    left: 0;
-    width: 100%;
-    height: 80px;
-    z-index: -1;
-    pointer-events: none;
-
-    background: linear-gradient(
-        to bottom,
-        rgba(30, 30, 46, 0) 0%,
-        rgba(30, 30, 46, 0) 60%,
-        rgba(17, 17, 27, 0) 100%
-    );
-}
-
 /* Container */
 .container {
-    width: 95%; 
+    width: 100%; 
     max-width: 1100px; 
     margin: 0 auto;
 }
 
 /* --- Animation --- */
 .content-section { animation: fadeIn 0.4s ease-out forwards; }
-@keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+@keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
 
 /* --- Section Headers --- */
 .section-title {
     text-align: center;
     width: 100%;
-    margin: 30px 0 30px 0;
+    margin: 40px 0 30px 0;
     font-size: 2.5rem;
     color: var(--ctp-lavender);
-    text-shadow: 0 0 20px #babbf1;
+    text-shadow: 0 0 20px rgba(186, 187, 241, 0.5);
 }
 
-/* --- FULL-WIDTH Sticky Navigation --- */
+/* --- Sticky Navigation --- */
 .tabs {
     display: flex;
     justify-content: center;
     gap: 12px;
-    padding: 12px 0;
+    padding: 15px 0;
     position: sticky;
     top: 0;
     z-index: 1000;
 
+    /* Full width fix */
     width: 100vw; 
     margin-left: calc(50% - 50vw);
     margin-right: calc(50% - 50vw);
 
     background: var(--ctp-base);
     border-bottom: 4px solid var(--ctp-pink);
-    border-radius: 0;
-
-    box-shadow: 0 10px 30px #000000;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.6);
 }
 
 /* Tab Buttons */
 .tab-btn {
     background: var(--ctp-surface0);
-    border: 1px solid transparent;
+    border: none;
     color: var(--ctp-subtext1);
     padding: 10px 25px;
     border-radius: var(--radius-large);
@@ -177,12 +155,7 @@ body::after {
     transition: all 0.3s ease;
 }
 .tab-btn:hover { background: var(--ctp-surface1); color: #fff; }
-
-/* Active Tab = Pink */
-.tab-btn.active {
-    background: var(--ctp-pink);
-    color: var(--ctp-base);
-}
+.tab-btn.active { background: var(--ctp-pink); color: var(--ctp-base); }
 
 /* --- Profile Header --- */
 .profile-header {
@@ -191,7 +164,7 @@ body::after {
     align-items: center;
     justify-content: center;
     gap: 30px;
-    margin-bottom: 50px;
+    margin: calc(var(--banner-height) - 60px) 0 50px 0;
     flex-wrap: nowrap;
 }
 .avatar {
@@ -200,7 +173,7 @@ body::after {
     border-radius: var(--radius-large);
     object-fit: cover;
     border: 3px solid var(--ctp-lavender);
-    box-shadow: 0 10px 40px #000000;
+    box-shadow: 0 10px 40px rgba(0,0,0,0.7);
     transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
     flex-shrink: 0;
 }
@@ -209,22 +182,10 @@ body::after {
 h1 { font-size: 2.8rem; color: #ffffff; margin: 0; }
 .tagline { color: var(--ctp-sky); margin-top: 8px; font-size: 1.2rem; }
 
-/* --- Acrylic Card (solid) --- */
-.acrylic-card {
-    width: 100%;
-    box-sizing: border-box;
-    background: var(--ctp-mantle);
-    border: 2px solid var(--ctp-pink);
-    border-radius: var(--radius-large);
-    padding: 40px;
-    text-align: center;
-    margin-bottom: 30px;
-}
-
 /* --- Links Grid --- */
 .links-container {
     display: grid;
-    grid-template-columns: 1fr; 
+    grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); 
     gap: 15px;
     width: 100%;
 }
@@ -255,60 +216,61 @@ h1 { font-size: 2.8rem; color: #ffffff; margin: 0; }
 .bluesky    { border-bottom: 4px solid var(--ctp-sapphire); }
 .spotify    { border-bottom: 4px solid var(--ctp-green); }
 
-/* --- Optimized Projects Grid --- */
+/* --- FIXED Projects Grid --- */
 .projects-grid {
     display: grid;
-    /* auto-fill creates as many columns as will fit, minimum 300px wide */
+    /* Automatically handles columns based on size */
     grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
     gap: 25px;
     margin-bottom: 50px;
-    width: 100%;
 }
-
 .project-card {
     background: var(--ctp-mantle);
     border: 1px solid var(--ctp-surface1);
     border-radius: var(--radius-large);
     padding: 24px;
     border-bottom: 5px solid var(--ctp-sky);
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-    
-    /* This ensures all cards in a row are the same height 
-       and content stays organized */
+    transition: all 0.4s ease;
     display: flex;
     flex-direction: column;
     text-align: center;
 }
-
-.project-card:hover {
-    transform: translateY(-8px);
-    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.4);
-    border-color: var(--ctp-lavender); /* Subtle color shift on hover */
+.project-card:hover { 
+    transform: translateY(-8px); 
+    box-shadow: 0 15px 30px rgba(0,0,0,0.6); 
+    border-color: var(--ctp-lavender);
 }
-
 .project-img {
     width: 100%;
-    aspect-ratio: 16 / 9; /* Keeps all project images the same shape */
-    object-fit: cover;    /* Prevents squishing */
+    aspect-ratio: 16 / 9; /* Keeps all project previews identical in size */
+    object-fit: cover;
     border-radius: var(--radius-medium);
     margin-bottom: 18px;
     display: block;
-    background: var(--ctp-crust); /* Loader color if image fails */
+    background: var(--ctp-crust);
 }
 
-/* Ensure the title and description take up space correctly */
 .project-card h3 {
     margin: 10px 0;
     color: var(--ctp-rosewater);
+    font-size: 1.4rem;
 }
 
 .project-card p {
-    font-size: 0.95rem;
     color: var(--ctp-subtext1);
-    line-height: 1.5;
-    flex-grow: 1; /* Pushes any buttons to the bottom of the card */
-    margin-bottom: 15px;
+    font-size: 0.95rem;
+    line-height: 1.6;
+    flex-grow: 1; /* Pushes content/buttons to even levels */
+    margin-bottom: 20px;
 }
 
-/* --- Old banner element disabled --- */
-.hero-banner { display: none; }
+/* --- Mobile Fixes --- */
+@media (max-width: 600px) {
+    .profile-header { flex-direction: column; text-align: center; }
+    .header-text { text-align: center; }
+    h1 { font-size: 2.2rem; }
+    .tabs { gap: 8px; }
+    .tab-btn { padding: 10px 15px; font-size: 0.85rem; }
+
+    :root { --banner-height: 28vh; }
+}
